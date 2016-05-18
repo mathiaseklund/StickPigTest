@@ -1,10 +1,9 @@
 package me.mathiaseklund.stickpig;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.World;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,8 +35,9 @@ public class PlayerListener implements Listener {
 		Location loc = p.getEyeLocation();
 		Vector v = p.getLocation().getDirection();
 		loc.add(v);
-		LivingEntity le = (LivingEntity) Bukkit.getWorld(loc.getWorld().getName()).spawnEntity(loc, EntityType.PIG);
+		World w = p.getWorld();
+		Pig pig = w.spawn(loc, Pig.class);
 		v = v.multiply(2);
-		le.setVelocity(v);
+		pig.setVelocity(v);
 	}
 }
